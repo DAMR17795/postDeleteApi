@@ -1,12 +1,15 @@
 package www.iesmurgi.postdeleteapi
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,16 +20,17 @@ class Insercion:AppCompatActivity(){
 
     private var allMovies = mutableListOf<Movies>()
     private lateinit var btnAniadir:Button
-    private lateinit var etId:EditText
+    private lateinit var etId:TextView
     private lateinit var etNombre:EditText
     private lateinit var etFecha:EditText
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.insercion)
 
-        etId = findViewById(R.id.editTextNumberSigned)
+        etId = findViewById(R.id.tvIDPeliculaCoger)
         etNombre = findViewById(R.id.editTextTextPersonName)
         etFecha = findViewById(R.id.editTextDate)
 
@@ -45,6 +49,7 @@ class Insercion:AppCompatActivity(){
                 val movies = response.body()?.movies
                 allMovies.addAll(movies!!)
                 println("TAMAÑO:" + allMovies.size)
+                etId.text = (allMovies.size + 1).toString()
                 // Aquí actualizas la interfaz de usuario con los datos cargados de la API.
                 // Por ejemplo:
                 // myTextView.text = myData.someValue
@@ -57,6 +62,7 @@ class Insercion:AppCompatActivity(){
 
         btnAniadir = findViewById(R.id.btAniadir)
         btnAniadir.setOnClickListener {
+
             val peliculaId = etId.text.toString()
             val nombrePelicula = etNombre.text.toString()
             val fechaPelicula = etFecha.text.toString()
