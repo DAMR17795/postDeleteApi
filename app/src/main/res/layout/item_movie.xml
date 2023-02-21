@@ -119,6 +119,31 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btModificar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:backgroundTint="#FFE500"
+                        android:layout_weight="1"
+                        android:text="MODIFICAR" />
+
+                    <Button
+                        android:id="@+id/btEliminar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="#FF0000"
+                        android:text="ELIMINAR" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>

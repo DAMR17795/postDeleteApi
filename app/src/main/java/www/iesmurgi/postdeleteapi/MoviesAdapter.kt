@@ -7,10 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +29,7 @@ class MoviesAdapter (private var datos: List<Movies>, private val listener: Main
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.bind(datos[position])
 
-        holder.itemView.setOnClickListener {
+        holder.itemView.findViewById<Button>(R.id.btEliminar).setOnClickListener {
             val context = holder.itemView.context
             val builder = AlertDialog.Builder(context)
 
@@ -60,6 +65,19 @@ class MoviesAdapter (private var datos: List<Movies>, private val listener: Main
             }
 
             builder.show()
+        }
+
+        holder.itemView.findViewById<Button>(R.id.btModificar).setOnClickListener {
+            var nombre = holder.itemView.findViewById<TextView>(R.id.tvNombre).text.toString()
+            var id = holder.itemView.findViewById<TextView>(R.id.tvID).text.toString()
+            var fechaLanzamiento = holder.itemView.findViewById<TextView>(R.id.tvFecha).text.toString()
+
+            val intent = Intent(holder.itemView.context, Insercion::class.java)
+            intent.putExtra("ID", id)
+            intent.putExtra("FECHA", fechaLanzamiento)
+            intent.putExtra("NOMBRE", nombre)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+
         }
     }
 
